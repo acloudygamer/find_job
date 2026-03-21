@@ -1,0 +1,7 @@
+# ADR 目录
+
+> 架构决策记录 (Architecture Decision Records)
+
+格式: `YYYY-MM-DD-XXX.md`
+
+参考: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
