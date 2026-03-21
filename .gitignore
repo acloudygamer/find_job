@@ -30,3 +30,4 @@ Thumbs.db
 # Environment overrides
 .env.local
 .env.*.local
+.claude/
