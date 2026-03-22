@@ -33,9 +33,6 @@ export default function DashboardPage() {
   // Delete confirmation
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  // Export format
-  const [exportingId, setExportingId] = useState<string | null>(null);
-
   useEffect(() => {
     fetchResumes();
   }, [fetchResumes]);
@@ -104,7 +101,6 @@ export default function DashboardPage() {
   };
 
   const handleExport = async (id: string, format: 'json' | 'markdown' = 'markdown') => {
-    setExportingId(id);
     try {
       const content = await exportResume(id, format);
       const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -117,8 +113,6 @@ export default function DashboardPage() {
       showToast('Resume exported', 'success');
     } catch {
       showToast('Failed to export resume', 'error');
-    } finally {
-      setExportingId(null);
     }
   };
 

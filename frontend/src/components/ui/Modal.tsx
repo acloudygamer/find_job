@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Button } from './Button';
 
 interface ModalProps {
   open: boolean;

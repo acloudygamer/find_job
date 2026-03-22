@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { ResumeResponse } from '../../api/types';
-import { Badge, Button } from '../../components/ui';
+import { Badge } from '../../components/ui';
 import { formatDistanceToNow } from '../../utils/date';
 
 interface ResumeCardProps {

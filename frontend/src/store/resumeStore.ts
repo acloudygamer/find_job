@@ -50,7 +50,7 @@ interface ResumeState {
   clearError: () => void;
 }
 
-export const useResumeStore = create<ResumeState>((set, get) => ({
+export const useResumeStore = create<ResumeState>((set) => ({
   resumes: [],
   currentResume: null,
   currentModules: [],

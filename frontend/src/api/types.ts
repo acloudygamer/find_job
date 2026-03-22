@@ -147,9 +147,15 @@ export type ExportFormat = 'json' | 'markdown';
 // GitHub Types
 // ============================================================
 
+export interface GitHubOwner {
+  login: string;
+  html_url: string;
+}
+
 export interface GitHubRepo {
   name: string;
   full_name: string;
+  owner: GitHubOwner;
   description: string | null;
   html_url: string;
   language: string | null;

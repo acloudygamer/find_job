@@ -9,9 +9,15 @@ from app.api.schemas import ApiResponse
 router = APIRouter(prefix="/github", tags=["github"])
 
 
+class GitHubOwner(BaseModel):
+    login: str
+    html_url: str
+
+
 class GitHubRepo(BaseModel):
     name: str
     full_name: str
+    owner: GitHubOwner
     description: Optional[str]
     html_url: str
     language: Optional[str]
@@ -71,6 +77,10 @@ async def list_repos(
             GitHubRepo(
                 name=r["name"],
                 full_name=r["full_name"],
+                owner=GitHubOwner(
+                    login=r.get("owner", {}).get("login", ""),
+                    html_url=r.get("owner", {}).get("html_url", ""),
+                ),
                 description=r.get("description"),
                 html_url=r["html_url"],
                 language=r.get("language"),

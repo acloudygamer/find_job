@@ -10,7 +10,6 @@ import type {
   FieldUpdate,
   FieldResponse,
 } from "../../api/types";
-import { formatDistanceToNow } from "../../utils/date";
 import GitHubImportModal from "../github/GitHubImportModal";
 
 // ── Module types with their default fields ─────────────────────────────────────
@@ -221,27 +220,36 @@ function ModuleCard({
               />
             </svg>
             {editingTitle ? (
-              <input
-                className="text-base font-semibold text-gray-900 border border-primary-300 rounded px-2 py-0.5 flex-1 min-w-0 outline-none focus:ring-2 focus:ring-primary-200"
-                value={titleValue}
-                onChange={(e) => setTitleValue(e.target.value)}
-                onBlur={handleTitleSave}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleTitleSave();
-                  if (e.key === "Escape") {
-                    setTitleValue(module.title);
-                    setEditingTitle(false);
-                  }
-                }}
-                onClick={(e) => e.stopPropagation()}
-                autoFocus
-              />
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                <input
+                  className="text-base font-semibold text-gray-900 border border-primary-300 rounded px-2 py-0.5 flex-1 min-w-0 outline-none focus:ring-2 focus:ring-primary-200"
+                  value={titleValue}
+                  onChange={(e) => setTitleValue(e.target.value)}
+                  onBlur={handleTitleSave}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleTitleSave();
+                    if (e.key === "Escape") {
+                      setTitleValue(module.title);
+                      setEditingTitle(false);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  autoFocus
+                  disabled={titleSaving}
+                />
+                {titleSaving && (
+                  <svg className="w-4 h-4 animate-spin text-primary-500" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                )}
+              </div>
             ) : (
               <span className="text-base font-semibold text-gray-900 truncate">
                 {module.title}
               </span>
             )}
-            <Badge variant="secondary">
+            <Badge variant="default">
               {template?.label ?? module.module_type}
             </Badge>
           </div>
@@ -653,7 +661,7 @@ export default function ResumeDetailPage() {
   };
 
   const handleCreateModule = async (resumeId: string, data: ModuleCreate) => {
-    await createModule(resumeId, data);
+    return await createModule(resumeId, data);
   };
 
   const handleUpdateModule = async (moduleId: string, data: ModuleUpdate) => {
