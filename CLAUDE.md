@@ -11,7 +11,7 @@ find_job 是一个简历设计管理系统，支持模块化简历编辑、与 G
 ```
 find_job/
 ├── backend/              # FastAPI 后端（app/api、app/models、app/repositories、app/services）
-├── frontend/             # React 前端（待创建）
+├── frontend/             # React 前端（React 18 + Vite + TypeScript + Zustand）
 ├── docker/              # Docker Compose 及 Dockerfile 配置
 ├── docs/                # 架构文档及决策记录
 │   ├── architecture.md  # 系统架构总览
@@ -34,6 +34,10 @@ find_job/
 | 后端 | Python FastAPI + SQLAlchemy + SQLite |
 | 部署 | Docker Compose |
 | AI | Claude API（规划中） |
+
+## 测试规则
+
+所有测试日志的输出格式必须包含 `[TEST-MEM]` 前缀。
 
 ## 开发命令
 
